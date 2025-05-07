@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
 interface PetItemProps {
   pet: {
@@ -13,18 +13,42 @@ interface PetItemProps {
 }
 
 const PetItem = ({ pet }: PetItemProps) => {
+  const [isPet, setIsPet] = useState(true);
+  const [imageState, setImage] = useState(pet.image);
+  function resetState() {
+    setImage(pet.image);
+  }
   return (
     <View style={styles.container}>
       <View style={styles.petInfo}>
-        <Image source={{ uri: pet.image }} style={styles.image} />
-
+        {/* {isPet ? (
+          <Image source={{ uri: pet.image }} style={styles.image} key={1} />
+        ) : (
+          <Image source={{ uri: pet.image2 }} style={styles.image} key={2} />
+        )} */}
+        <Image
+          source={{ uri: imageState }}
+          style={styles.image}
+          key={imageState}
+        />
         <Text style={styles.name}>{pet.name}</Text>
 
         <Text style={styles.description}>{pet.description}</Text>
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.petButton}>
+        <TouchableOpacity
+          style={styles.petButton}
+          onPress={() => {
+            // setIsPet(!isPet);
+            // console.log("isPet", isPet);
+            if (imageState === pet.image) {
+              setImage(pet.image2);
+            } else {
+              setImage(pet.image);
+            }
+          }}
+        >
           <Text style={styles.buttonText}>Pet</Text>
         </TouchableOpacity>
 

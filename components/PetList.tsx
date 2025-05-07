@@ -11,13 +11,22 @@ import PetItem from "./PetItem";
 
 const PetList = () => {
   const petList = pets.map((pet) => <PetItem key={pet.id} pet={pet} />);
+  const [query, setQuery] = useState("");
+
   return (
     <ScrollView
       contentContainerStyle={styles.container}
       style={styles.containerStyle}
     >
       {/* Search Input */}
-      <TextInput placeholder="Search for a pet" style={styles.searchInput} />
+      <TextInput
+        placeholder="Search for a pet"
+        style={styles.searchInput}
+        onChangeText={(value) => {
+          setQuery(value);
+          console.log(query);
+        }}
+      />
 
       {/* Filter by type */}
       <ScrollView horizontal contentContainerStyle={styles.filterContainer}>
