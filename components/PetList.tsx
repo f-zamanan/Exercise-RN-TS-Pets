@@ -13,6 +13,8 @@ const PetList = () => {
   const petList = pets.map((pet) => <PetItem key={pet.id} pet={pet} />);
   const [query, setQuery] = useState("");
 
+  // filter by query
+
   return (
     <ScrollView
       contentContainerStyle={styles.container}
